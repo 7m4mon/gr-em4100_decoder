@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<block>
+  <name>EM4100 Decoder Sink</name>
+  <key>em4100_decoder_em4100_decoder_b</key>
+  <category>[em4100_decoder]</category>
+  <import>import em4100_decoder</import>
+  <make>em4100_decoder.em4100_decoder_b($sample_per_bit, $bit_sync_num)</make>
+  <param>
+    <name>Samples Per bit</name>
+    <key>sample_per_bit</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Bit Sync Num</name>
+    <key>bit_sync_num</key>
+    <type>int</type>
+  </param>
+
+  <!-- Make one 'sink' node per input. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+</block>
