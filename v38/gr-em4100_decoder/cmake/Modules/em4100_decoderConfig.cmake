@@ -1,0 +1,31 @@
+INCLUDE(FindPkgConfig)
+PKG_CHECK_MODULES(PC_EM4100_DECODER em4100_decoder)
+
+FIND_PATH(
+    EM4100_DECODER_INCLUDE_DIRS
+    NAMES em4100_decoder/api.h
+    HINTS $ENV{EM4100_DECODER_DIR}/include
+        ${PC_EM4100_DECODER_INCLUDEDIR}
+    PATHS ${CMAKE_INSTALL_PREFIX}/include
+          /usr/local/include
+          /usr/include
+)
+
+FIND_LIBRARY(
+    EM4100_DECODER_LIBRARIES
+    NAMES gnuradio-em4100_decoder
+    HINTS $ENV{EM4100_DECODER_DIR}/lib
+        ${PC_EM4100_DECODER_LIBDIR}
+    PATHS ${CMAKE_INSTALL_PREFIX}/lib
+          ${CMAKE_INSTALL_PREFIX}/lib64
+          /usr/local/lib
+          /usr/local/lib64
+          /usr/lib
+          /usr/lib64
+          )
+
+include("${CMAKE_CURRENT_LIST_DIR}/em4100_decoderTarget.cmake")
+
+INCLUDE(FindPackageHandleStandardArgs)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(EM4100_DECODER DEFAULT_MSG EM4100_DECODER_LIBRARIES EM4100_DECODER_INCLUDE_DIRS)
+MARK_AS_ADVANCED(EM4100_DECODER_LIBRARIES EM4100_DECODER_INCLUDE_DIRS)
